@@ -3,10 +3,13 @@ import {
   View,
   StyleSheet,
   Animated,
+  KeyboardAvoidingView,
+  ScrollView,
 } from 'react-native';
 import {
   SearchBar
 } from 'react-native-elements';
+import SearchItem from '../components/SearchItem';
 
 export default class SearchModal extends Component {
   //Local states for animations
@@ -18,7 +21,7 @@ export default class SearchModal extends Component {
 
   componentWillUpdate(nextProps, nextState) {
     if(nextProps.value && this.props.value) {
-        if (nextProps.value.length > this.props.value.length && this.state.cities.length < 20 && this.state.cities.length > 0) {
+        if (nextProps.value.length > this.props.value.length && this.state.cities.length < 20 && nextProps.value.length > 3) {
             let newCities = [];
             this.state.cities.forEach(function(city) {
                 if (city.startsWith(nextProps.value)) {
@@ -42,6 +45,15 @@ export default class SearchModal extends Component {
   render() {
     let {barPos} = this.state.barPos;
     let {opacity} = this.state.opacity;
+
+    let searchItems = [];
+    if (this.state.cities.length > 0 && this.state.cities[0] != "")
+        searchItems = this.state.cities.map((text, key) => {
+            var arr = text.split(',');
+            var style = {};
+            if (key == this.state.cities.length-1) style = {borderBottomWidth: 0};
+            return <SearchItem style={style} city={arr[0]} state={arr[1]} country={arr[2]} key={key}/>
+        });
 
     if(this.props.opened) {
       Animated.parallel([
@@ -82,6 +94,11 @@ export default class SearchModal extends Component {
               placeholder='City...'
               value={this.props.value}/>
           </Animated.View>
+          <ScrollView style={styles.scrollView}
+                      keyboardDismissMode="on-drag"
+                      keyboardShouldPersistTaps="always">
+            {searchItems}
+          </ScrollView>
         </Animated.View>
       );
     }
@@ -96,7 +113,6 @@ export default class SearchModal extends Component {
           duration: 300,
         })
       ]).start(() => {
-        console.log('123');
         return(
           <View pointerEvents="none"></View>
         );
@@ -145,5 +161,10 @@ const styles = StyleSheet.create({
   searchBarContainer: {
     backgroundColor: '#393E42',
     paddingTop: 30,
+  },
+  scrollView: {
+      flex: 1,
+      flexDirection: 'column',
+      backgroundColor: 'rgba(15,15,15,0.76)',
   },
 });
