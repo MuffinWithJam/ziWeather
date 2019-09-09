@@ -1,0 +1,6 @@
+export const SEARCH_OPEN = 'SEARCH_OPEN';
+export const SEARCH_CLOSE = 'SEARCH_CLOSE';
+export const SEARCH_UPDATE = 'SEARCH_UPDATE';
+
+export const WEATHER_UPDATE = 'WEATHER_UPDATE';
+
