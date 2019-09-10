@@ -10,7 +10,11 @@ export default class SearchItem extends Component {
     render() {
         return (
             <TouchableHighlight
-                onPress={() => {}}
+                onPress={() => {
+                    this.props.infoActions.getMainInfo(this.props.city, this.props.country);
+                    this.props.uiActions.updateSearch("");
+                    this.props.uiActions.closeSearch();
+                }}
                 underlayColor={"rgba(238,238,238,0.06)"}
                 style={styles.searchItemButton}>
                 <View style={[styles.searchItem, this.props.style]}>

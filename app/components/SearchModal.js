@@ -52,7 +52,9 @@ export default class SearchModal extends Component {
             var arr = text.split(',');
             var style = {};
             if (key == this.state.cities.length-1) style = {borderBottomWidth: 0};
-            return <SearchItem style={style} city={arr[0]} state={arr[1]} country={arr[2]} key={key}/>
+            return <SearchItem style={style} city={arr[0]} state={arr[1]} country={arr[2]} key={key}
+                               uiActions={this.props.uiActions}
+                               infoActions={this.props.infoActions}/>
         });
 
     if(this.props.opened) {

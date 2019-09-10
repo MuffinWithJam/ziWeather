@@ -1,8 +1,9 @@
 import {
-  GET_MAININFO_REQUEST,
-  GET_MAININFO_SUCCESS,
-  GET_MAININFO_FAIL,
+    GET_MAININFO_REQUEST,
+    GET_MAININFO_SUCCESS,
+    GET_MAININFO_FAIL,
 } from '../constants/info';
+import { COUNTRIES } from '../constants/countries';
 import { APIKEY } from '../constants/api';
 
 function requestMainInfo() {
@@ -56,14 +57,20 @@ export function getMainInfoFromGeo(lat, lon) {
         .then(json => {
             var tempCelsius = parseInt(json.main.temp - 273.15);
             dispatch(recieveMainInfo(json.name, tempCelsius, json.weather[0].description, true));
-            console.log(json);
             }
         )
   }
 }
 
-export function getMainInfo(cityText) {
-    var url = "https://api.openweathermap.org/data/2.5/weather?lat=" +lat+"&lon="+lon+"&appid="+APIKEY;
+export function getMainInfo(city, country) {
+    let countryCode = "";
+    for (let i = 0; i < COUNTRIES.length; i++){
+        if (COUNTRIES[i].name.toLowerCase().trim() == country.toLowerCase().trim()){
+            countryCode = COUNTRIES[i].code;
+        }
+    }
+
+    var url = "https://api.openweathermap.org/data/2.5/weather?q=" +city+","+countryCode+"&appid="+APIKEY;
 
     return (dispatch) => {
         dispatch(requestMainInfo);
@@ -78,8 +85,7 @@ export function getMainInfo(cityText) {
             )
             .then(json => {
                     var tempCelsius = parseInt(json.main.temp - 273.15);
-                    dispatch(recieveMainInfo(json.name, tempCelsius, json.weather[0].description, true));
-                    console.log(json);
+                    dispatch(recieveMainInfo(json.name, tempCelsius, json.weather[0].description, false));
                 }
             )
     }

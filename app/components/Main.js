@@ -1,18 +1,15 @@
 import React, {Component} from 'react';
 import {
   StyleSheet,
-  ScrollView,
   Text,
   View,
   Image,
   Dimensions,
-  TouchableHighlight,
 } from 'react-native';
 import VerticalViewPager from 'react-native-vertical-view-pager';
 import MainInfo from '../components/MainInfo';
 import LocationButton from '../components/LocationButton';
 import SearchModal from '../components/SearchModal';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('window');
 
@@ -36,7 +33,8 @@ export default class Main extends Component {
         <VerticalViewPager
           showsVerticalScrollIndicator={false}
           stickyHeaderIndices={[0]}
-          bounces={false}>
+          bounces={false}
+          style={{borderWidth: 1, borderColor: 'red'}}>
           <View style={styles.mainInfo} onPress>
             <MainInfo currentWeather={this.props.mainInfoState.currentWeather}
                       uiActions={this.props.uiActions}
@@ -52,7 +50,8 @@ export default class Main extends Component {
 
         <SearchModal opened={this.props.uiState.searchState.opened}
                      value={this.props.uiState.searchState.text}
-                     uiActions={this.props.uiActions}/>
+                     uiActions={this.props.uiActions}
+                     infoActions={this.props.infoActions}/>
       </View>
     );
   }
@@ -85,6 +84,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'red',
     alignItems:'stretch',
+    height: height,
   },
   mainInfo: {
     flex: 1,
@@ -95,15 +95,15 @@ const styles = StyleSheet.create({
     marginTop: height*3/5,
     paddingTop: 8,
     //borderWidth: 1,
-    //borderColor: 'yellow',
+    //borderColor: 'green',
   },
   moreInfo: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     width: width,
-    height: height*3/5,
-    marginTop: height*2/5,
+    height: height/5,
+    marginTop: 0,
     //borderWidth: 1,
     //borderColor: 'yellow',
   },

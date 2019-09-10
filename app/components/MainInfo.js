@@ -60,8 +60,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     paddingLeft: 20,
     paddingTop: 20,
-    //borderWidth: 1,
-    //borderColor: 'green',
   },
   city: {
     color: '#eee',
