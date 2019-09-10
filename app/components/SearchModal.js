@@ -29,7 +29,6 @@ export default class SearchModal extends Component {
                 }
             });
             this.setState({cities: newCities});
-            console.log("Changing internal array...");
         }
         else if (nextProps.value.length >= 3 && this.props.value != nextProps.value) {
             var url = "http://gd.geobytes.com/AutoCompleteCity?q=" + nextProps.value;
@@ -37,7 +36,6 @@ export default class SearchModal extends Component {
                 .then(res => res.json())
                 .then(responseText => this.setState({cities: responseText}))
                 .catch(err => console.log(err));
-            console.log("Made request");
         }
     }
   }

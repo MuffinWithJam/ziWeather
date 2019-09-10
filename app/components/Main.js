@@ -40,9 +40,6 @@ export default class Main extends Component {
                       infoActions={this.props.infoActions}
                       isGeo={this.props.mainInfoState.currentWeather.isGeo}/>
           </View>
-          <View style={styles.moreInfo}>
-            <Text>INFO SCREEN</Text>
-          </View>
         </VerticalViewPager>
 
         <LocationButton uiActions={this.props.uiActions} />
