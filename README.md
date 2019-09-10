@@ -1,7 +1,7 @@
 # ziWeather
 Small weather app made with React Native and Redux. Based on [Expo](https://expo.io/).
 
-#####Used APIs
+####Used APIs
 + [Geobytes AJAX Autocomplete List Cities API](http://geobytes.com/free-ajax-cities-jsonp-api/)
 + [OpenWeather API](https://openweathermap.org/api)
 
