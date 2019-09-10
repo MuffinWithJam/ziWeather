@@ -33,8 +33,7 @@ export default class Main extends Component {
         <VerticalViewPager
           showsVerticalScrollIndicator={false}
           stickyHeaderIndices={[0]}
-          bounces={false}
-          style={{borderWidth: 1, borderColor: 'red'}}>
+          bounces={false}>
           <View style={styles.mainInfo} onPress>
             <MainInfo currentWeather={this.props.mainInfoState.currentWeather}
                       uiActions={this.props.uiActions}
